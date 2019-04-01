@@ -18,7 +18,7 @@ public class SpringGetBeanUtil implements ApplicationContextAware {
         if(SpringGetBeanUtil.applicationContext == null) {
             SpringGetBeanUtil.applicationContext = applicationContext;
         }
-        logger.info("ApplicationContext配置成功,applicationContext对象："+ SpringGetBeanUtil.applicationContext);
+        logger.info("ApplicationContext ===> 配置成功,applicationContext对象："+ SpringGetBeanUtil.applicationContext);
     }
     public static ApplicationContext getApplicationContext() {
         return applicationContext;
