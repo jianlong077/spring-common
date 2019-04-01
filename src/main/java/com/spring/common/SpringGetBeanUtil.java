@@ -1,4 +1,4 @@
-package cc.lechun.framework.core.common;
+package com.spring.common;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
