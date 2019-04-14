@@ -1,4 +1,5 @@
 package com.spring.base.filter;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 /**
  * 记录控制层异常
@@ -6,7 +7,8 @@ package com.spring.base.filter;
  * @author LOVE_HAIYAN_521
  *
  */
-public abstract class RecordControlException {
+public abstract class RecordControlException extends HandlerInterceptorAdapter  {
+
 	/**
 	 * 根据实际情况进行处理
 	 */
