@@ -25,7 +25,7 @@ public class BaseUseTimeEntity extends BaseEntity implements Serializable {
 	 * 路径
 	 */
 	private double useTime;
-	private Exception e;
+	private String exception;
 	/**
 	 * 最大内存
 	 */
@@ -67,12 +67,13 @@ public class BaseUseTimeEntity extends BaseEntity implements Serializable {
 		this.path = path;
 	}
 
-	public Exception getE() {
-		return e;
+	
+	public String getException() {
+		return exception;
 	}
 
-	public void setE(Exception e) {
-		this.e = e;
+	public void setException(String exception) {
+		this.exception = exception;
 	}
 
 	public double getMaxMemory() {

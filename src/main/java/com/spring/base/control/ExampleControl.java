@@ -1,26 +1,26 @@
 package com.spring.base.control;
 
 import java.util.List;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.base.service.impl.ExampleBaseServiceImpl;
 @RestController
-public class ExampleControl<BaseJsonVo> implements ControlBase{
+public class ExampleControl<BaseJsonVo>{
+	@Autowired
+	private ExampleBaseServiceImpl exampleBaseServiceImpl;
 	@RequestMapping("/ExampleControl/saveOrUpdates")
-	@Override
-	public List<BaseJsonVo> saveOrUpdates(HttpServletRequest request) {
-		// TODO Auto-generated method stub
+	public List<BaseJsonVo> saveOrUpdates(HttpServletRequest request) throws Exception {
+		exampleBaseServiceImpl.save(null, null);
 		return null;
 	}
 	@RequestMapping("/ExampleControl/find")
-	@Override
-	public String find(HttpServletRequest request) {
-		// TODO Auto-generated method stub
-		return "nihao ya";
+	public String find(HttpServletRequest request) throws Exception {
+		exampleBaseServiceImpl.find(null);
+		return "nihao";
 	}
 
 }

@@ -10,7 +10,7 @@ public interface BaseService<T,USER> {
 	 * @param user
 	 * @return
 	 */
-	public int saveOrUpdates(List<T> list, USER user);
+	public int saveOrUpdates(List<T> list, USER user)  throws Exception;
 
 	/**
 	 * 批量更新需要实现BD
@@ -19,7 +19,7 @@ public interface BaseService<T,USER> {
 	 * @param user
 	 * @return
 	 */
-	public int updateLists(List<T> list, USER user);
+	public int updateLists(List<T> list, USER user)  throws Exception;
 
 	/**
 	 * 批量添加需要实现BD
@@ -28,7 +28,7 @@ public interface BaseService<T,USER> {
 	 * @param user
 	 * @return
 	 */
-	public int saveList(List<T> list, USER user);
+	public int saveList(List<T> list, USER user)  throws Exception;
 
 	/**
 	 * 单个更新
@@ -37,7 +37,7 @@ public interface BaseService<T,USER> {
 	 * @param user
 	 * @return
 	 */
-	public int update(T t, USER user);
+	public int update(T t, USER user)  throws Exception;
 
 	/**
 	 * 单个添加
@@ -46,7 +46,7 @@ public interface BaseService<T,USER> {
 	 * @param user
 	 * @return
 	 */
-	public int save(T t, USER user);
+	public int save(T t, USER user)  throws Exception;
 
 	/**
 	 * 查询需要自定义
@@ -54,5 +54,5 @@ public interface BaseService<T,USER> {
 	 * @param list
 	 * @return
 	 */
-	public List<T> find(List<T> list);
+	public List<T> find(List<T> list)  throws Exception;
 }
