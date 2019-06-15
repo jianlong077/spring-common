@@ -17,23 +17,30 @@ public class RedisLock {
 	 */
 	@Autowired
 	private RedisTemplate<String, String> redisTemplate;
-	 public void myLock(String key, Method method) throws Exception{
-	        lock(Lock+ key,  method);
+	 public boolean myLock(String key, Method method) throws Exception{
+	        return lock(Lock+ key,  method);
 	    }
-	public void lock(String key, Method method)  throws Exception{
+	 private boolean lock(String key, Method method)  throws Exception{
 	    long startTime=System.currentTimeMillis();
         String value = startTime+"";
         boolean flag=this.tryLock(key, value);
         log.info("【redis分布式锁 （"+flag+"）】, {key:"+key+",value:"+value+"}");
         if (flag) {
-            method.runMethod();
-            this.unlock(key);
+        	try {
+                method.runMethod();
+                this.unlock(key);
+            }catch (Exception e){
+                log.error("【redis分布式锁 锁内运行程序异常】",e);
+                this.unlock(key);
+                return false;
+            }
         } else {
             log.info("【redis分布式锁 （"+flag+"）获取失败尝试重新获取锁】, {key:"+key+",value:"+value+"}");
-            this.lock(key, method);
+            return this.lock(key, method);
         }
         long endTime=System.currentTimeMillis();
         log.info("【redis分布式锁 ，运行 耗时 ："+(endTime-startTime)+" 毫秒】");
+		return true;
 	}
 
 	private boolean tryLock(String key, String value) {
