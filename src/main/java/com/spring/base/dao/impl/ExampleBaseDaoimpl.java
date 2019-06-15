@@ -1,5 +1,6 @@
 package com.spring.base.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -11,12 +12,12 @@ public class ExampleBaseDaoimpl extends BaseDaoImpl{
 
 	@Override
 	public List find(List list) throws Exception {
-		 throw new  Exception("dao层异常");
+		 return list;
 	}
 	
 	
 	public List findById(String a) throws Exception {
-		 throw new  Exception("dao层异常");
+		 return  new ArrayList<>();
 	}
 
 	@Override

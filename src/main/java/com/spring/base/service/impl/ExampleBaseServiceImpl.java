@@ -37,12 +37,7 @@ public class ExampleBaseServiceImpl implements BaseService{
 
 	@Override
 	public int save(Object t, Object user) throws Exception {
-		try {
 			exampleBaseDaoimpl.findById(null);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
 		return 0;
 	}
 

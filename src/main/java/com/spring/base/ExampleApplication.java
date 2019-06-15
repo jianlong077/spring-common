@@ -12,9 +12,5 @@ public class ExampleApplication extends SpringBootServletInitializer{
         SpringApplication.run(ExampleApplication.class, args);
         //new SpringApplicationBuilder(OmsServiceApplication.class).web(true).run(args);
     }
-	/*
-	 * @Override protected SpringApplicationBuilder
-	 * configure(SpringApplicationBuilder application) { return
-	 * application.sources(ExampleApplication.class); }
-	 */
+	
 }
