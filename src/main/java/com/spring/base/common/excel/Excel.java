@@ -10,14 +10,19 @@ import org.apache.poi.ss.usermodel.Workbook;
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.entity.TemplateExportParams;
 public class  Excel {
-	private String path = "exporttemplate/ole.xlsx";
+	private String path = "Excel/ole.xlsx";
 	Map<String, Object> sheets = new HashMap<String, Object>();
-	public Workbook buildExcel() {
+	/**
+	 * 
+	 * @param fileName 文件名
+	 * @param response HttpServletResponse；
+	 */
+	public void downLoadExcel(String fileName,HttpServletResponse response) {
 		// 利用了java运行时的系统属性来得到jar文件位置，也是/xxx/xxx.jar这种形式。
 		String tempPath = IoUtil.convertResourceTemplatePath(path);
 		TemplateExportParams params = new TemplateExportParams(tempPath, true);
 		Workbook workbook = ExcelExportUtil.exportExcel(params, sheets);
-		return workbook;
+		downLoadExcel(fileName, response, workbook);
 	}
 
 	public String getPath() {
@@ -31,7 +36,7 @@ public class  Excel {
 		sheets.put(sheet.getSheetIndex(), sheet.getVale());
 	}
 	//控制层输出调用此方法
-	public static void controlDownLoadExcel(String fileName, HttpServletResponse response, Workbook workbook) {
+	public static void downLoadExcel(String fileName, HttpServletResponse response, Workbook workbook) {
         try {
         	fileName = new String(fileName.getBytes(), "ISO-8859-1");
             response.setHeader("Content-Disposition", "attachment;filename=" +fileName+".xlsx");
