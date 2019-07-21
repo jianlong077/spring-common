@@ -33,7 +33,7 @@ public class  Excel {
 		this.path = path;
 	}
 	public void buildSheetValue(Sheet<Object> sheet) {
-		sheets.put(sheet.getSheetIndex(), sheet.getVale());
+		sheets.put(sheet.getSheetIndex()+"", sheet.getVale());
 	}
 	//控制层输出调用此方法
 	public static void downLoadExcel(String fileName, HttpServletResponse response, Workbook workbook) {
