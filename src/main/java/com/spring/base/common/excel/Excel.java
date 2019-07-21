@@ -11,7 +11,7 @@ import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.entity.TemplateExportParams;
 public class  Excel {
 	private String path = "Excel/ole.xlsx";
-	Map<String, Object> sheets = new HashMap<String, Object>();
+	private Map<String, Object> sheets = new HashMap<String, Object>();
 	/**
 	 * 
 	 * @param fileName 文件名
