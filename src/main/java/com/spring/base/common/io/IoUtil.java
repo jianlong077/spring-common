@@ -4,11 +4,14 @@ import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 
 public class IoUtil {
 	private static final Logger log = LoggerFactory.getLogger(IoUtil.class);
@@ -87,4 +90,47 @@ public class IoUtil {
 		long endTime = System.currentTimeMillis();
 		log.info("写入文件耗时  " + (endTime - startTime) / 1000 + " 秒");
 	}
+	 //利用了java运行时的系统属性来得到jar文件位置，也是/xxx/xxx.jar这种形式。 path="Excel/ole.xlsx"
+	public static String convertResourceTemplatePath(String path) {
+        // 如果是windows 则直接返回
+        // if (System.getProperties().getProperty("os.name").contains("Windows")) {
+        // return path;
+        // }
+
+        Resource resource = new ClassPathResource(path);
+        FileOutputStream fileOutputStream = null;
+        // 将模版文件写入到 tomcat临时目录
+        String folder = System.getProperty("catalina.home");
+        File tempFile = new File(folder + File.separator + path);
+        // System.out.println("文件路径：" + tempFile.getPath());
+        // 文件存在时 不再写入
+        if (tempFile.exists()) {
+            return tempFile.getPath();
+        }
+        File parentFile = tempFile.getParentFile();
+        // 判断父文件夹是否存在
+        if (!parentFile.exists()) {
+            parentFile.mkdirs();
+        }
+        try {
+            BufferedInputStream bufferedInputStream = new BufferedInputStream(resource.getInputStream());
+            fileOutputStream = new FileOutputStream(tempFile);
+            byte[] buffer = new byte[10240];
+            int len = 0;
+            while ((len = bufferedInputStream.read(buffer)) != -1) {
+                fileOutputStream.write(buffer, 0, len);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fileOutputStream != null) {
+                try {
+                    fileOutputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return tempFile.getPath();
+    }
 }
