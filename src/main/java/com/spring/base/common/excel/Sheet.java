@@ -3,13 +3,14 @@ package com.spring.base.common.excel;
 import java.util.List;
 
 public class Sheet<T> {
-private Integer sheet;
+private String sheetIndex;
 private List<T> vale;
-public Integer getSheet() {
-	return sheet;
+
+public String getSheetIndex() {
+	return sheetIndex;
 }
-public void setSheet(Integer sheet) {
-	this.sheet = sheet;
+public void setSheetIndex(String sheetIndex) {
+	this.sheetIndex = sheetIndex;
 }
 public List<T> getVale() {
 	return vale;
