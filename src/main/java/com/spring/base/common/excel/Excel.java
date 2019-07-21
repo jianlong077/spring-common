@@ -1,13 +1,19 @@
 package com.spring.base.common.excel;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 import javax.servlet.http.HttpServletResponse;
 
 import com.spring.base.common.io.IoUtil;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.springframework.web.multipart.MultipartFile;
+
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
+import cn.afterturn.easypoi.excel.ExcelImportUtil;
+import cn.afterturn.easypoi.excel.entity.ImportParams;
 import cn.afterturn.easypoi.excel.entity.TemplateExportParams;
 public class  Excel {
 	private String path = "Excel/ole.xlsx";
@@ -24,6 +30,13 @@ public class  Excel {
 		Workbook workbook = ExcelExportUtil.exportExcel(params, sheets);
 		downLoadExcel(fileName, response, workbook);
 	}
+	public <T> List<T>  ImportExcel(MultipartFile file, Integer titleRows, Integer headerRows, Class<T> pojoClass) throws IOException, Exception {
+		    ImportParams params = new ImportParams();
+	        params.setTitleRows(titleRows);
+	        params.setHeadRows(headerRows);	   
+	        List<T> list=ExcelImportUtil.importExcel(file.getInputStream(), pojoClass, params);
+	        return list;
+	}
 
 	public String getPath() {
 		return path;
@@ -32,7 +45,7 @@ public class  Excel {
 	public void setPath(String path) {
 		this.path = path;
 	}
-	public void buildSheetValue(Sheet<Object> sheet) {
+	public <T> void buildSheetValue(Sheet<T> sheet) {
 		sheets.put(sheet.getSheetIndex()+"", sheet.getVale());
 	}
 	//控制层输出调用此方法
