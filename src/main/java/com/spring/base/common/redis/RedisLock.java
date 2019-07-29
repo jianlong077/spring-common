@@ -25,7 +25,7 @@ public class RedisLock {
 		/**
     	 * 确保value是唯一的
     	 */
-		String value=redisTemplate.opsForValue().increment(redisLock+"add"+key)+"";
+		String value=redisTemplate.opsForValue().increment(redisLock+key)+"";
 		try {
 			Boolean lock = redisTemplate.opsForValue().setIfAbsent(key, value, timeout, TimeUnit.SECONDS);
 			if (lock) {
